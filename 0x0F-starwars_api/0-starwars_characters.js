@@ -20,7 +20,7 @@ request(options, async (error, response, body) => {
     throw new Error(`HTTP error: ${response.status}`);
   }
   for (const characterURL of response.body.characters) {
-    Promise((resolve, reject) => {
+    await new Promise((resolve, reject) => {
       request(characterURL, (err, res, body1) => {
         if (err) {
           reject(new Error(`HTTP error: ${res.status}`));
