@@ -76,10 +76,11 @@ void _printSearch(int *array, int start, int end)
 
 	while (j <= end)
 	{
-	if (j > start)
+		if (j > start)
 		printf(", ");
 		printf("%d", array[j]);
 		j++;
 	}
+
 	printf("\n");
 }
