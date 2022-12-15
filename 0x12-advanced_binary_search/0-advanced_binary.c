@@ -10,45 +10,53 @@
  *
  * Return: the index where value is located or -1
  */
-
 int advanced_binary(int *array, size_t size, int value)
 {
+
+	int low = 0;
+	int high = (int)size - 1;
 
 	if (array == NULL || size == 0)
 		return (-1);
 
-	return (findFirstOccurnce(array, size, value));
+	return (findFirstOccurnce(array, low, high, value));
 }
 
 /**
  * findFirstOccurnce - Binary search for finding the first occurence
- * @A :  the array to search in
- * @n : size of array
- * @target :  the target element to be found
+ * @arr:  the array to search in
+ * @low: first index of array
+ * @high : last index of array
+ * @value:  the target element to be found
  *
  * Return:  the first index where value is located or if no value -1
  */
-int findFirstOccurnce(int A[], int n, int target)
+
+int findFirstOccurnce(int *arr, int low, int high, int value)
 {
-	int low = 0, high = n - 1;
 	int mid;
 
-	if (!A || high < low)
+	if (!arr || low == high)
 		return (-1);
 
-	while (low <= high)
-	{
-		_printSearch(A, low, high);
-		mid = low + (high - low) / 2;
-	if ((mid == 0 || A[mid - 1] < target) && A[mid] == target)
+	_printSearch(arr, low, high);
+
+	mid = low + (high - low) / 2;
+
+	if (arr[mid] < value)
+		return (findFirstOccurnce(arr, mid + 1, high, value));
+
+	if (arr[mid] > value)
+		return (findFirstOccurnce(arr, low, mid, value));
+
+	if (arr[mid] == value && arr[mid - 1] != value)
 		return (mid);
-	else if (target > A[mid])
-		low = mid + 1;
-	else
-		high = mid - 1;
-	}
+
+	if (arr[mid] == value && arr[mid - 1] == value)
+		return (findFirstOccurnce(arr, low, mid, value));
 	return (-1);
 }
+
 
 
 /**
@@ -68,11 +76,10 @@ void _printSearch(int *array, int start, int end)
 
 	while (j <= end)
 	{
-		if (j > start)
-			printf(", ");
-			printf("%d", array[j]);
-			j++;
+	if (j > start)
+		printf(", ");
+		printf("%d", array[j]);
+		j++;
 	}
-
 	printf("\n");
 }
