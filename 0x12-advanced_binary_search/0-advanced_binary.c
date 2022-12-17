@@ -56,7 +56,7 @@ int findFirstOccurnce(int *arr, int low, int high, int value)
 		return (mid);
 
 	if (arr[mid] == value && arr[mid - 1] == value)
-		return (low);
+		return (findFirstOccurnce(arr, low, mid, value));
 	return (-1);
 }
 
