@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include <string.h>
+#include "holberton.h"
 
 int is_valid_number(char *num);
 void multiply(int *num1, int *num2, int len1, int len2, int *result);
