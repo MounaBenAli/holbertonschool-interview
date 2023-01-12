@@ -1,8 +1,5 @@
 #include "holberton.h"
 
-
-
-
 /**
  * is_valid_number - check if the given string is a valid number
  * @num: string to check
@@ -90,13 +87,13 @@ int main(int argc, char *argv[])
 
 	if (argc != 3)
 	{
-		printf("Error\n");
+		/*printf("Error\n");*/
 		exit(98);
 	}
 
 	if (!is_valid_number(argv[1]) || !is_valid_number(argv[2]))
 	{
-		printf("Error\n");
+		/*printf("Error\n");*/
 		exit(98);
 	}
 
