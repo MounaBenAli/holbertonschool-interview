@@ -83,11 +83,10 @@ void multiply(int *num1, int *num2, int len1, int len2, int *result)
 
 int main(int argc, char *argv[])
 {
-	
-    int len1 = strlen(argv[1]);
+	int len1 = strlen(argv[1]);
 	int len2 = strlen(argv[2]);
-    int num1[len1], num2[len2], result[len1 + len2];
-    int i;
+	int num1[len1], num2[len2], result[len1 + len2];
+	int i;
 
 	if (argc != 3)
 	{
@@ -101,9 +100,6 @@ int main(int argc, char *argv[])
 		exit(98);
 	}
 
-	
-
-
 	for (i = 0; i < len1; i++)
 	{
 		num1[i] = argv[1][i] - '0';
@@ -113,14 +109,15 @@ int main(int argc, char *argv[])
 	{
 		num2[i] = argv[2][i] - '0';
 	}
-
 	reverse(num1, len1);
 	reverse(num2, len2);
-
 	multiply(num1, num2, len1, len2, result);
 	reverse(result, len1 + len2);
 
-	for (i = 0; i < (len1 + len2); i++)
+	i = 0;
+	while (result[i] == 0 && i < len1 + len2 - 1)
+	i++;
+	for (; i < (len1 + len2); i++)
 	{
 		_putchar(result[i] + '0');
 	}
