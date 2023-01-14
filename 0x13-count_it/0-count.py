@@ -6,6 +6,7 @@ import json
 
 
 def count_words(subreddit, word_list, after=None):
+    """recursive function that queries the Reddit API"""
     # Send a GET request to the Reddit API
     url = f"https://www.reddit.com/r/{subreddit}/hot.json"
     params = {"limit": 100}
