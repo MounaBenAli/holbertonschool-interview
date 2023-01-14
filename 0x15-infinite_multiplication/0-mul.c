@@ -82,18 +82,20 @@ int main(int argc, char *argv[])
 {
 	int len1 = strlen(argv[1]);
 	int len2 = strlen(argv[2]);
-	int num1[len1], num2[len2], result[len1 + len2];
+	int num1[len1];
+	int num2[len2]
+	int result[len1 + len2];
 	int i;
 
 	if (argc != 3)
 	{
-		/*printf("Error\n");*/
+		
 		exit(98);
 	}
 
 	if (!is_valid_number(argv[1]) || !is_valid_number(argv[2]))
 	{
-		/*printf("Error\n");*/
+		
 		exit(98);
 	}
 
