@@ -8,17 +8,15 @@
  */
 int is_valid_number(char *num)
 {
-	int len = strlen(num);
-	int i;
+	int i = 0;
 
-	for (i = 0; i < len; i++)
+	while (num[i])
 	{
-		if (!isdigit(num[i]))
-		{
-			return (0);
-		}
+	if (num[i] < '0' || num[i] > '9')
+		return (0);
+	i++;
 	}
-	return (1);
+return (1);
 }
 
 /**
@@ -49,25 +47,33 @@ void reverse(int *num, int len)
  */
 void multiply(int *num1, int *num2, int len1, int len2, int *result)
 {
-	int i, j, carry, temp;
+	int index1, index2;
 
-	for (i = 0; i < len1 + len2; i++)
+	for (index1 = 0; index1 < len1; index1++)
 	{
-		result[i] = 0;
-	}
-
-	for (i = 0; i < len1; i++)
-	{
-		carry = 0;
-		for (j = 0; j < len2; j++)
+		for (index2 = 0; index2 < len2; index2++)
 		{
-			temp = result[i + j] + num1[i] * num2[j] + carry;
-			result[i + j] = temp % 10;
-			carry = temp / 10;
+		result[index1 + index2] += num1[index1] * num2[index2];
+		result[index1 + index2 + 1] += result[index1 + index2] / 10;
+		result[index1 + index2] %= 10;
 		}
-
-	result[i + len2] += carry;
 	}
+}
+
+/**
+ * exit_error - error return
+ *
+ * @status: error code to exit with
+ */
+void exit_error(int status)
+{
+	_putchar('E');
+	_putchar('r');
+	_putchar('r');
+	_putchar('o');
+	_putchar('r');
+	_putchar('\n');
+	exit(status);
 }
 
 /**
@@ -80,46 +86,42 @@ void multiply(int *num1, int *num2, int len1, int len2, int *result)
 
 int main(int argc, char *argv[])
 {
+
 	int len1 = strlen(argv[1]);
 	int len2 = strlen(argv[2]);
-	int num1[len1];
-	int num2[len2]
-	int result[len1 + len2];
+	int *num1 = malloc(len1 * sizeof(int));
+	int *num2 = malloc(len2 * sizeof(int));
+	int *result = malloc((len1 + len2) * sizeof(int));
 	int i;
 
 	if (argc != 3)
 	{
-		
-		exit(98);
+		exit_error(98);
 	}
 
 	if (!is_valid_number(argv[1]) || !is_valid_number(argv[2]))
 	{
-		
-		exit(98);
+		exit_error(98);
 	}
 
 	for (i = 0; i < len1; i++)
-	{
-		num1[i] = argv[1][i] - '0';
-	}
+	num1[i] = argv[1][len1 - i - 1] - '0';
 
 	for (i = 0; i < len2; i++)
-	{
-		num2[i] = argv[2][i] - '0';
-	}
-	reverse(num1, len1);
-	reverse(num2, len2);
-	multiply(num1, num2, len1, len2, result);
-	reverse(result, len1 + len2);
+	num2[i] = argv[2][len2 - i - 1] - '0';
 
-	i = 0;
-	while (result[i] == 0 && i < len1 + len2 - 1)
-	i++;
-	for (; i < (len1 + len2); i++)
-	{
-		_putchar(result[i] + '0');
-	}
+	multiply(num1, num2, len1, len2, result);
+	i = len1 + len2 - 1;
+	while (i >= 0 && result[i] == 0)
+	i--;
+	if (i == -1)
+	_putchar('0');
+	else
+	while (i >= 0)
+	_putchar(result[i--] + '0');
 	_putchar('\n');
-return (0);
+	free(num1);
+	free(num2);
+	free(result);
+	return (0);
 }

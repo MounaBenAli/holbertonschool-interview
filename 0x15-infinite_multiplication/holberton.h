@@ -2,15 +2,15 @@
 #define HOLBERTON_H_
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <stddef.h>
-#include <ctype.h>
 #include <string.h>
+#include <unistd.h>
+#include <stdlib.h>
 
 int _putchar(char c);
-int is_valid_number(char* num);
-void multiply(int* num1, int* num2, int len1, int len2, int* result);
-void reverse(int* num, int len);
+void reverse(int *result, int len);
+int is_valid_number(char *numb);
+void multiply(int *num1, int *num2, int len1, int len2, int *result);
+void exit_error(int status);
 
 
 #endif /* HOLBERTON_H_*/
