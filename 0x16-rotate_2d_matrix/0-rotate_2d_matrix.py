@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Test 0x16 - Rotate 2D Matrix
+Rotate 2D Matrix
 """
 
 
