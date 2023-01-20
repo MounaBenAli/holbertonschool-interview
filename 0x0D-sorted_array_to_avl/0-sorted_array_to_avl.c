@@ -12,23 +12,24 @@
  **/
 avl_t *tree_from_array(int *array, int left, int right, avl_t *parent)
 {
-int midpoint;
-avl_t *root_node;
+	int midpoint;
+	avl_t *root_node;
 
 
-if (left > right)
-return (NULL);
+	if (left > right)
+		return (NULL);
 
-midpoint = (left + right) / 2;
+	midpoint = (left + right) / 2;
 
-root_node = malloc(sizeof(avl_t));
-if (!root_node)
-return (NULL);
+	root_node = malloc(sizeof(avl_t));
+	if (!root_node)
+		return (NULL);
 
-root_node->n = array[midpoint];
-root_node->parent = parent;
-root_node->left = tree_from_array(array, left, midpoint - 1, root_node);
-root_node->right = tree_from_array(array, midpoint + 1, right, root_node);
+	root_node->n = array[midpoint];
+	root_node->parent = parent;
+	root_node->left = tree_from_array(array, left, midpoint - 1, root_node);
+	root_node->right = tree_from_array(array, midpoint + 1, right, root_node);
+
 return (root_node);
 }
 
@@ -42,8 +43,7 @@ return (root_node);
 avl_t *sorted_array_to_avl(int *array, size_t size)
 {
 
-if (!array)
-return (NULL);
-
+	if (!array)
+		return (NULL);
 return (tree_from_array(array, 0, size - 1, NULL));
 }
