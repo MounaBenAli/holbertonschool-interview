@@ -2,10 +2,10 @@
 
 /**
  * find_listint_loop -  finds the loop/cycle in a linked list
- * head: list to verify for cycle detection
+ * @head: list to verify for cycle detection
  * Return: if there is no cycle NULL,
  * if there is a cycle the address of the node where the loop starts
- * solution Floyd's cycle detection algorithm (Tortoise and hare)
+ * solution Floyd's cycle detection algorithm (Tortoise and Hare)
  * Tcomplexity O(n) Scomplexity O(1)
  */
 
