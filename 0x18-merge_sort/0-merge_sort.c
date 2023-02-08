@@ -13,7 +13,7 @@ void merge(int *array, int start_index, int middle_index, int end_index)
 {
 	int left_array_size;
 	int right_array_size;
-	int left_array[left_array_size]
+	int left_array[left_array_size];
 	int right_array[right_array_size];
 	int i, j, k;
 
