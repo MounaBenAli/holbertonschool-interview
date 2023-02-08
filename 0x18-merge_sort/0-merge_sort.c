@@ -11,14 +11,22 @@
  */
 void merge(int *array, int start_index, int middle_index, int end_index)
 {
-	int left_array_size;
-	int right_array_size;
-	int left_array[left_array_size];
-	int right_array[right_array_size];
+	int left_array_size, right_array_size;
+	int *left_array, *right_array;
 	int i, j, k;
 
 	left_array_size = middle_index - start_index + 1;
 	right_array_size = end_index - middle_index;
+	left_array = malloc(left_array_size * sizeof(int));
+	if (!left_array)
+		return;
+
+	right_array = malloc(right_array_size * sizeof(int));
+	if (!right_array)
+	{
+	free(left_array);
+	return;
+	}
 
 	for (i = 0; i < left_array_size; i++)
 		left_array[i] = array[start_index + i];
@@ -40,6 +48,9 @@ void merge(int *array, int start_index, int middle_index, int end_index)
 
 	while (j < right_array_size)
 		array[k++] = right_array[j++];
+
+	free(left_array);
+	free(right_array);
 }
 
 
