@@ -11,10 +11,14 @@
  */
 void merge(int *array, int start_index, int middle_index, int end_index)
 {
-	int left_array_size = middle_index - start_index + 1;
-	int right_array_size = end_index - middle_index;
-	int left_array[left_array_size], right_array[right_array_size];
+	int left_array_size;
+	int right_array_size;
+	int left_array[left_array_size]
+	int right_array[right_array_size];
 	int i, j, k;
+
+	left_array_size = middle_index - start_index + 1;
+	right_array_size = end_index - middle_index;
 
 	for (i = 0; i < left_array_size; i++)
 		left_array[i] = array[start_index + i];
