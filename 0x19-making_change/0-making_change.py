@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """The Change Making Problem -
 Fewest Coins To Make Change
-Solved using dynamic programming with memoization & recursion
-"""
+Solved using Bottom-UP Dynamic Programming"""
 
 
 def makeChange(coins, total):
@@ -17,24 +16,11 @@ def makeChange(coins, total):
     if total <= 0:
         return 0
 
-    memo = {0: 0}
+    dp = [float('inf')] * (total + 1)
+    dp[0] = 0
 
-    def dp(amount):
-        """Recursive helper function that finds the minimum number of coins needed for the given amount
-        """
-        if amount in memo:
-            return memo[amount]
+    for coin in coins:
+        for i in range(coin, total + 1):
+            dp[i] = min(dp[i], dp[i - coin] + 1)
 
-        min_coins = float('inf')
-        for coin in coins:
-            if coin > amount:
-                continue
-            sub_min_coins = dp(amount - coin)
-            if sub_min_coins == -1:
-                continue
-            min_coins = min(min_coins, sub_min_coins + 1)
-
-        memo[amount] = -1 if min_coins == float('inf') else min_coins
-        return memo[amount]
-
-    return dp(total)
+    return dp[total] if dp[total] != float('inf') else -1
