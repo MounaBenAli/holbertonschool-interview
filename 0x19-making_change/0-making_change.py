@@ -1,11 +1,14 @@
 #!/usr/bin/python3
-"""The Change Making Problem - Fewest Coins To Make Change Dynamic Programming"""
+"""The Change Making Problem -
+Fewest Coins To Make Change
+Solved using Bottom-UP Dynamic Programming"""
 
 
-def makeChange(coins, total):
+def make_change(coins, total):
     """Given a pile of coins of different values,
     determine the fewest number of coins needed
     to meet a given amount total.
+
     Return: fewest number of coins needed to meet total
     If total is 0 or less, return 0
     If total cannot be met by any number of coins you have, return -1
