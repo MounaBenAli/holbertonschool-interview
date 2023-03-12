@@ -30,7 +30,7 @@ int find_max(int *arr, int n)
 */
 void countingSort(int *array, int n, int pos)
 {
-	int result[n + 1];
+	int *result = malloc(sizeof(int) * (n + 1));
 	int count[10] = {0};
 	int i;
 
@@ -51,7 +51,10 @@ void countingSort(int *array, int n, int pos)
 
 	for (i = 0; i < n; i++)
 		array[i] = result[i];
+
+	free(result);
 }
+
 
 /**
 * radix_sort - Sort an integer array using the radix sort algorithm
