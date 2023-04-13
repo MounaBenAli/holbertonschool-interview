@@ -1,41 +1,41 @@
 #!/usr/bin/python3
-"""recursive function that queries the Reddit API"""
+"""Tags counting module"""
 
-import json
 import requests
 
 
-
-def count_words(subreddit, word_list, after=None):
-    """recursive function that queries the Reddit API"""
-    # Send a GET request to the Reddit API
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
-    params = {"limit": 100}
-    if after:
-        params["after"] = after
-    response = requests.get(url, params=params, allow_redirects=False)
-    if response.status_code != 200:
-        return
-
-    # Parse the JSON response
-    data = json.loads(response.text)
-
-    # Count the occurrences of each keyword in the titles
-    count = {}
-    for word in word_list:
-        count[word] = 0
-    for child in data["data"]["children"]:
-        title = child["data"]["title"].lower()
+def count_words(subreddit, word_list, word_count={}, after=""):
+    """Counts words"""
+    if len(word_count) <= 0:
         for word in word_list:
-            if word in title:
-                count[word] += 1
+            word_count[word.lower()] = 0
 
-    # Print the results in descending order
-    for word, c in sorted(count.items(), key=lambda x: (-x[1], x[0])):
-        if c > 0:
-            print(f"{word}: {c}")
+    if after is None:
+        sorted_word_count = dict(sorted(
+            word_count.items(),
+            key=lambda x: (x[1], x[0]),
+            reverse=True
+            ))
+        for k, v in sorted_word_count.items():
+            if v > 0:
+                print("{}: {}".format(k, v))
+        return None
 
-    # Call the function recursively with the "after" parameter
-    after = data["data"]["after"]
-    if after:
-        count_words(subreddit, word_list, after)
+    url = "https://api.reddit.com/r/{}/hot".format(subreddit)
+    params = {'limit': 100, 'after': after}
+    headers = {'user-agent': 'counting-app'}
+    response = requests.get(url, headers=headers,
+                            params=params, allow_redirects=False)
+
+    if response.status_code == 200:
+        after = response.json().get("data").get("after")
+        children = response.json().get("data").get("children")
+        for child in children:
+            title_words_lower = child.get("data").get(
+                "title").lower().split(" ")
+            for word in word_list:
+                word_count[word.lower()] += title_words_lower.count(
+                    word.lower())
+        count_words(subreddit, word_list, word_count, after)
+    else:
+        return None
