@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "substring.h": "c",
+        "string.h": "c"
+    }
+}
