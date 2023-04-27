@@ -3,6 +3,7 @@
 Prime Game
 """
 
+
 def isWinner(x, nums):
     # create a list of prime numbers for each value of n in nums
     primes = [set() for _ in range(max(nums) + 1)]
