@@ -6,6 +6,14 @@ Prime Game
 
 def isWinner(x, nums):
     """ Prime Game """
+
+    if not nums:
+        # if nums is an empty list, return None
+        return None
+    if x < 1:
+        # if x is less than 1, return None
+        return None
+
     # create a list of prime numbers for each value of n in nums
     primes = [set() for _ in range(max(nums) + 1)]
     for i in range(2, len(primes)):
