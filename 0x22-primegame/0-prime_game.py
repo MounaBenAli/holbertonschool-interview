@@ -6,14 +6,12 @@ Prime Game
 
 def isWinner(x, nums):
     """ Prime Game """
-
     if not nums:
         # if nums is an empty list, return None
         return None
     if x < 1:
         # if x is less than 1, return None
         return None
-
     # create a list of prime numbers for each value of n in nums
     primes = [set() for _ in range(max(nums) + 1)]
     for i in range(2, len(primes)):
@@ -23,6 +21,12 @@ def isWinner(x, nums):
     # determine the winner for each round
     maria_wins = 0
     for n in nums:
+        if n < 0:
+            # if n is negative, return None
+            return None
+        if n >= len(primes):
+            # if n is out of range, return None
+            return None
         if len(primes[n]) == 0:
             # if there are no primes, Ben wins
             maria_wins += 0
