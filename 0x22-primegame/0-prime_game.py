@@ -4,16 +4,8 @@ Prime Game
 """
 
 
-def is_prime(n):
-    if n < 2:
-        return False
-    for i in range(2, int(n**0.5) + 1):
-        if n % i == 0:
-            return False
-    return True
-
-
 def isWinner(x, nums):
+    """ Prime Game """
     # create a list of prime numbers for each value of n in nums
     primes = [set() for _ in range(max(nums) + 1)]
     for i in range(2, len(primes)):
@@ -23,8 +15,8 @@ def isWinner(x, nums):
     # determine the winner for each round
     maria_wins = 0
     for n in nums:
-        if n < 2 or len(primes[n]) == 0:
-            # if the number is less than 2 or has no primes, Ben wins
+        if len(primes[n]) == 0:
+            # if there are no primes, Ben wins
             maria_wins += 0
         elif len(primes[n]) % 2 == 0:
             # if the number of primes is even, Maria wins
